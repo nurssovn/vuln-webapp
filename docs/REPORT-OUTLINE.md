@@ -21,7 +21,7 @@ Screenshot terminal:
 
 ```bash
 sudo apt update
-sudo apt install openjdk-17-jdk git
+sudo apt install default-jdk git
 java -version
 uname -a
 ```

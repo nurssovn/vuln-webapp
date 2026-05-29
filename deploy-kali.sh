@@ -6,15 +6,29 @@ cd "$APP_DIR"
 
 echo "=== VulnShop Kali Linux deployment ==="
 
-if ! command -v java >/dev/null 2>&1; then
-  echo "Installing OpenJDK 17..."
+install_java() {
+  echo "Installing Java JDK..."
   sudo apt update
-  sudo apt install -y openjdk-17-jdk curl
+  for pkg in default-jdk openjdk-21-jdk openjdk-17-jdk openjdk-11-jdk; do
+    if apt-cache show "$pkg" >/dev/null 2>&1; then
+      echo "Found package: $pkg"
+      sudo apt install -y "$pkg" curl git
+      return 0
+    fi
+  done
+  echo "ERROR: No JDK package found. Try manually:"
+  echo "  apt-cache search openjdk | grep jdk"
+  echo "  sudo apt install -y default-jdk"
+  exit 1
+}
+
+if ! command -v java >/dev/null 2>&1; then
+  install_java
 fi
 
-if ! command -v curl >/dev/null 2>&1; then
+if ! command -v curl >/dev/null 2>&1 || ! command -v git >/dev/null 2>&1; then
   sudo apt update
-  sudo apt install -y curl
+  sudo apt install -y curl git
 fi
 
 echo "Java version:"

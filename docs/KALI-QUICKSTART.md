@@ -6,7 +6,7 @@
 
 ```bash
 sudo apt update
-sudo apt install -y git openjdk-17-jdk curl
+sudo apt install -y git curl default-jdk
 
 git clone https://github.com/nurssovn/vuln-webapp.git
 cd vuln-webapp

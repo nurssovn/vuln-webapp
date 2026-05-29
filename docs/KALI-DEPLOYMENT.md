@@ -43,7 +43,7 @@ scp -r ~/IdeaProjects/vuln-webapp kali@KALI_IP:/home/kali/
 
 ```bash
 sudo apt update
-sudo apt install -y openjdk-17-jdk git curl
+sudo apt install -y default-jdk git curl
 java -version
 ```
 
