@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | VulnShop</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="phishing">
+<main class="container narrow">
+    <section class="panel">
+        <h1>VulnShop Login</h1>
+        <p class="hint phishing-note">Phishing simulation page — looks like real login but saves credentials locally.</p>
+
+        <div th:if="${message}" class="alert success" th:text="${message}"></div>
+
+        <form method="post" th:action="@{/phishing/login}" class="form">
+            <label>Username
+                <input type="text" name="username" required>
+            </label>
+            <label>Password
+                <input type="password" name="password" required>
+            </label>
+            <button type="submit" class="btn primary">Sign in</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

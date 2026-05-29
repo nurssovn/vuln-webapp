@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Search | VulnShop</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <div class="container nav">
+        <a class="logo" th:href="@{/}">VulnShop</a>
+        <nav>
+            <a th:href="@{/login}">Login</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <section class="panel">
+        <h1>User search</h1>
+        <p class="hint">Vulnerable to SQL Injection via <code>?q=</code> parameter.</p>
+
+        <form method="get" th:action="@{/search}" class="form inline">
+            <input type="text" name="q" placeholder="Search username or email" th:value="${query}">
+            <button type="submit" class="btn">Search</button>
+        </form>
+
+        <p th:if="${rawQuery != null}">
+            Results for:
+            <!-- VULNERABLE: reflected XSS via th:utext -->
+            <span th:utext="${rawQuery}"></span>
+        </p>
+
+        <table th:if="${results != null}">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${results}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.username}"></td>
+                <td th:text="${item.email}"></td>
+                <td th:text="${item.password}"></td>
+                <td th:text="${item.role}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

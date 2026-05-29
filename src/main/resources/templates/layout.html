@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle != null ? pageTitle + ' | VulnShop' : 'VulnShop'}">VulnShop</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <div class="container nav">
+        <a class="logo" th:href="@{/}">VulnShop</a>
+        <nav>
+            <a th:href="@{/search}">Search</a>
+            <a th:href="@{/comments}">Comments</a>
+            <a th:href="@{/admin}">Admin</a>
+            <a th:if="${user != null}" th:href="@{/dashboard}">Dashboard</a>
+            <a th:if="${user != null}" th:href="@{/settings}">Settings</a>
+            <a th:if="${user == null}" th:href="@{/login}">Login</a>
+            <a th:if="${user != null}" th:href="@{/logout}">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <div th:if="${success}" class="alert success" th:text="${success}"></div>
+    <div th:if="${error}" class="alert error" th:text="${error}"></div>
+    <div th:replace="${content}">Content</div>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>Intentionally vulnerable app for cybersecurity education only.</p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin | VulnShop</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <div class="container nav">
+        <a class="logo" th:href="@{/}">VulnShop</a>
+    </div>
+</header>
+
+<main class="container">
+    <section class="panel">
+        <h1>Admin panel</h1>
+        <p class="hint">Broken access control: try <code>/admin?admin=true</code> without logging in as admin.</p>
+
+        <div th:if="${error}" class="alert error" th:text="${error}"></div>
+
+        <table th:if="${accessGranted}">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Role</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${users}">
+                <td th:text="${item.id}"></td>
+                <td th:text="${item.username}"></td>
+                <td th:text="${item.email}"></td>
+                <td th:text="${item.password}"></td>
+                <td th:text="${item.role}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

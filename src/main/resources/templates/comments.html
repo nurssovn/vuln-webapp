@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Comments | VulnShop</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <div class="container nav">
+        <a class="logo" th:href="@{/}">VulnShop</a>
+        <nav>
+            <a th:href="@{/login}">Login</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <section class="panel">
+        <h1>Comments</h1>
+        <p class="hint">Stored XSS: try <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code></p>
+
+        <form method="post" th:action="@{/comments}" class="form">
+            <label>Your comment
+                <textarea name="content" rows="4" required placeholder="Write a comment..."></textarea>
+            </label>
+            <button type="submit" class="btn primary">Post comment</button>
+        </form>
+
+        <div class="comment-list">
+            <article class="comment" th:each="comment : ${comments}">
+                <header>
+                    <strong th:text="${comment.author}">author</strong>
+                    <span th:text="${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}"></span>
+                </header>
+                <!-- VULNERABLE: stored XSS via th:utext -->
+                <div class="comment-body" th:utext="${comment.content}"></div>
+            </article>
+        </div>
+    </section>
+</main>
+</body>
+</html>
