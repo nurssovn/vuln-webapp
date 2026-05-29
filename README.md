@@ -45,12 +45,14 @@ JDBC URL: `jdbc:h2:file:./data/vulndb`
 
 ## Deploy on Kali Linux (required for project)
 
+Quick guide: [docs/KALI-QUICKSTART.md](docs/KALI-QUICKSTART.md)
+
 ```bash
 sudo apt update
-sudo apt install -y openjdk-17-jdk git
-git clone <your-repo-url> vuln-webapp
+sudo apt install -y git openjdk-17-jdk curl
+git clone https://github.com/nurssovn/vuln-webapp.git
 cd vuln-webapp
-chmod +x deploy-kali.sh
+chmod +x deploy-kali.sh mvnw
 ./deploy-kali.sh
 ```
 
