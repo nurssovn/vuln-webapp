@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings | VulnShop</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <div class="container nav">
+        <a class="logo" th:href="@{/}">VulnShop</a>
+        <nav>
+            <a th:href="@{/dashboard}">Dashboard</a>
+            <a th:href="@{/logout}">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container narrow">
+    <section class="panel">
+        <h1>Account settings</h1>
+        <p class="hint">Vulnerable to CSRF — no anti-CSRF token on the form.</p>
+
+        <div th:if="${success}" class="alert success" th:text="${success}"></div>
+        <div th:if="${error}" class="alert error" th:text="${error}"></div>
+
+        <form method="post" th:action="@{/settings/password}" class="form">
+            <input type="hidden" name="userId" th:value="${user.id}">
+            <label>New password
+                <input type="text" name="newPassword" required>
+            </label>
+            <button type="submit" class="btn primary">Change password</button>
+        </form>
+    </section>
+</main>
+</body>
+</html>

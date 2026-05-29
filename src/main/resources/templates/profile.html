@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile | VulnShop</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <div class="container nav">
+        <a class="logo" th:href="@{/}">VulnShop</a>
+    </div>
+</header>
+
+<main class="container">
+    <section class="panel" th:if="${profile != null}">
+        <h1>Profile: <span th:text="${profile.username}">user</span></h1>
+        <p class="hint">IDOR: change <code>?id=</code> in URL to view other users.</p>
+
+        <p>Email: <span th:text="${profile.email}"></span></p>
+        <p>Role: <span th:text="${profile.role}"></span></p>
+        <p>Password (plain text): <code th:text="${profile.password}"></code></p>
+
+        <h2>Bio</h2>
+        <!-- VULNERABLE: stored XSS in bio -->
+        <div class="bio" th:utext="${profile.bio}"></div>
+
+        <form th:if="${user != null and user.id == profile.id}"
+              method="post"
+              th:action="@{/profile/update}"
+              class="form">
+            <label>Update bio (XSS demo)
+                <textarea name="bio" rows="4" th:text="${profile.bio}"></textarea>
+            </label>
+            <button type="submit" class="btn">Save bio</button>
+        </form>
+    </section>
+
+    <section class="panel" th:if="${error != null}">
+        <p class="alert error" th:text="${error}"></p>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>VulnShop | Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <div class="container nav">
+        <a class="logo" th:href="@{/}">VulnShop</a>
+        <nav>
+            <a th:href="@{/search}">Search</a>
+            <a th:href="@{/comments}">Comments</a>
+            <a th:href="@{/admin}">Admin</a>
+            <a th:if="${user != null}" th:href="@{/dashboard}">Dashboard</a>
+            <a th:if="${user != null}" th:href="@{/settings}">Settings</a>
+            <a th:if="${user == null}" th:href="@{/login}">Login</a>
+            <a th:if="${user != null}" th:href="@{/logout}">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <section class="hero">
+        <h1>VulnShop</h1>
+        <p class="subtitle">Deliberately vulnerable web application for security testing in Kali Linux.</p>
+        <div class="cards">
+            <article class="card">
+                <h3>SQL Injection</h3>
+                <p>Try the login or user search forms.</p>
+                <a class="btn" th:href="@{/login}">Login</a>
+            </article>
+            <article class="card">
+                <h3>XSS</h3>
+                <p>Post HTML/JavaScript in comments or profile bio.</p>
+                <a class="btn" th:href="@{/comments}">Comments</a>
+            </article>
+            <article class="card">
+                <h3>CSRF</h3>
+                <p>Change passwords without a CSRF token.</p>
+                <a class="btn" th:href="@{/settings}">Settings</a>
+            </article>
+            <article class="card">
+                <h3>Phishing demo</h3>
+                <p>Fake login page for simulation (authorized testing only).</p>
+                <a class="btn" th:href="@{/phishing/login}">Fake login</a>
+            </article>
+        </div>
+    </section>
+
+    <section class="panel">
+        <h2>Default test accounts</h2>
+        <table>
+            <thead>
+            <tr><th>Username</th><th>Password</th><th>Role</th></tr>
+            </thead>
+            <tbody>
+            <tr><td>admin</td><td>admin123</td><td>ADMIN</td></tr>
+            <tr><td>user</td><td>password</td><td>USER</td></tr>
+            <tr><td>john</td><td>1234</td><td>USER</td></tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer class="footer">
+    <div class="container">
+        <p>Deploy on Kali Linux VM and test with Burp Suite, sqlmap, nmap, Nikto.</p>
+    </div>
+</footer>
+</body>
+</html>

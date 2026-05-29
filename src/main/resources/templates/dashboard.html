@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard | VulnShop</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header class="topbar">
+    <div class="container nav">
+        <a class="logo" th:href="@{/}">VulnShop</a>
+        <nav>
+            <a th:href="@{/profile(id=${user.id})}">My profile</a>
+            <a th:href="@{/settings}">Settings</a>
+            <a th:href="@{/logout}">Logout</a>
+        </nav>
+    </div>
+</header>
+
+<main class="container">
+    <section class="panel">
+        <h1>Welcome, <span th:text="${user.username}">user</span></h1>
+        <p>Role: <strong th:text="${user.role}">USER</strong></p>
+        <p>Email: <span th:text="${user.email}">email</span></p>
+        <ul class="links">
+            <li><a th:href="@{/search}">Search users (SQLi)</a></li>
+            <li><a th:href="@{/comments}">Comments (XSS)</a></li>
+            <li><a th:href="@{/admin}">Admin panel (broken access control)</a></li>
+        </ul>
+    </section>
+</main>
+</body>
+</html>
