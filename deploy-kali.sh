@@ -51,6 +51,10 @@ for i in {1..20}; do
     fi
     echo "Logs:       tail -f logs/app.log"
     echo "Stop app:   kill \$(cat logs/app.pid)"
+    echo
+    echo "Useful commands:"
+    echo "  nmap -sV localhost"
+    echo "  nikto -h http://localhost:8080"
     exit 0
   fi
   sleep 2
